@@ -5,44 +5,48 @@ function getQuestions(cb) {
         if(err) {
             cb(err, null)
         } else {
-            temp1(result.rows, finalRes => {
-                // do something finalRes
-                cb(null, finalRes);
-            })
-            // temp1(result.rows, cb);
+            updateExistingQuestionOptions(result.rows, cb);
         }
     })
 };
 
-function temp1(result, cb) {
-    let newResult = [];
-    result.forEach(ques => {
-        temp(ques.options, arr => {
-            ques.options = arr;
-            newResult.push(ques);
-            if(newResult.length === result.length) {
-                cb(newResult);
+function updateExistingQuestionOptions(questions, cb) {
+    let updatedQuestions = [];
+
+    questions.forEach(ques => {
+        getOptionsTextGivenId(ques.options, updatedOptions => {
+
+            ques.options = updatedOptions;
+
+            updatedQuestions.push(ques);
+
+            if(updatedQuestions.length === questions.length) {
+                cb(null, updatedQuestions);
             }
+
         });
     })
+
 }
 
-function temp(options, cb) {
-    let arr = [];
+function getOptionsTextGivenId(options, cb) {
+    let updatedOptions = [];
+
     options.forEach((option) => {
-        checkOption(option, (err, result) => {
+        checkOption(option, (err, fetchedOption) => {
+            
             if(err) {
                 console.log(err);
             } else {
-                arr.push(result);
+                updatedOptions.push(fetchedOption);
             }
-            if(arr.length === options.length) {
-                cb(arr);
+
+            if(updatedOptions.length === options.length) {
+                cb(updatedOptions);
             }
+
         });
     })
-    
-    
 
 }
 
