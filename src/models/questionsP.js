@@ -3,10 +3,10 @@ const db = require('../db/indexP');
 const getQuestion = id => {
     return db.query('Select * from questions where id=$1', [id])
             .then(result => result.rows[0])
-            // .catch(err => {
-            //     console.log('Error happened in getQuestion: ', err);
-            //     return err;
-            // })
+            .catch(err => {
+                console.log('Error happened in getQuestion: ', err);
+                return err;
+            })
 }
 
 const getAnswer = qId => {
