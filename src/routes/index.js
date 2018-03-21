@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const qnaController = require('../controllers/qnaController');
-const userController = require('../controllers/userController');
+const qnaController = require('../controllers/qnaControllerP');
+const userController = require('../controllers/userControllerP');
 
-router.get('/questions', qnaController.getQuestions);
-router.get('/solutions', qnaController.getAnswers);
+// router.get('/questions', qnaController.getQuestions);
+router.post('/solutions', qnaController.getAnswers);
 
 module.exports = router;
