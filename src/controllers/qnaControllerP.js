@@ -2,7 +2,14 @@ const Quiz = require('../models/questionsP');
 
 const generateRandomQidList = n => {
     return Quiz.getRowCount('questions').then(count => {
-        return [1, 2, 3, 4]; // complete this function
+        let randomList = [];
+        while(randomList.length !== n) {
+            let val = Math.ceil(Math.random() * count);
+            if(randomList.indexOf(val) === -1) {
+                randomList.push(val);
+            }
+        }
+        return randomList;
     })
 } 
 
