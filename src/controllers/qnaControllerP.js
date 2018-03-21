@@ -1,7 +1,54 @@
 const Quiz = require('../models/questionsP');
 
+const generateRandomQidList = n => {
+    return Quiz.getRowCount('questions').then(count => {
+        return [1, 2, 3, 4]; // complete this function
+    })
+} 
+
 const getQuestions = (req, res) => {
-    Quiz.getQuestions()
+    let quesList = [];
+    generateRandomQidList(req.body.count)
+        .then(qIdList => {
+
+            qIdList.forEach(qId => quesList.push(Quiz.getQuestion(qId)));
+
+            Promise.all(quesList)
+                .then(quesList => {
+                        let updatedQuesList = [];
+                        quesList.forEach(ques => {
+
+                            let optionsTextList = [];
+                            let updatedQues = new Promise((resolve, reject) => {
+                                
+                                ques.options.forEach(optionId => optionsTextList.push(Quiz.getOptionText(optionId)));
+
+                                Promise.all(optionsTextList)
+                                    .then(optionsTextList => {
+                                        ques.options = optionsTextList; 
+                                        resolve(ques)
+                                    })
+                                    .catch(err => {
+                                        reject(err);
+                                    });
+
+                            })
+
+                            updatedQuesList.push(updatedQues);
+
+                        })
+                        
+                        Promise.all(updatedQuesList)
+                            .then(updatedQuesList => res.send(updatedQuesList))
+                            .catch(err => res.send(err));
+
+                }).catch(err => {
+                    console.log('Error happened in getQuestions controller: ', err);
+                    res.send(err);
+                });
+
+        });
+
 }
 
 
@@ -42,10 +89,11 @@ const getAnswers = (req, res) => {
         console.log('Error happened in getAnswer contoller: ', err);
         res.send(err);
     });
-}
+};
 
 
 
 module.exports = {
+    getQuestions,
     getAnswers
 }
