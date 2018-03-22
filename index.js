@@ -3,6 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
+const path = require('path');
 const Router = require('./src/routes');
 const userController = require('./src/controllers/userControllerP');
 const User = require('./src/models/usersP');
@@ -10,6 +11,7 @@ const User = require('./src/models/usersP');
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'dist')));
 
 const strategy = new LocalStrategy((username, password, done) => {
     User.getUserGivenEmail(username).then(result => {
