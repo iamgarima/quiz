@@ -52,8 +52,7 @@ app.use(passport.session());
 app.use('/quiz', Router);
 app.post('/signup', userController.addUser);
 app.post('/login', passport.authenticate('local'), (req, res) => {
-    let msg = `Hi, ${req.user.email}`;
-    res.send(msg);
+    res.send(true);
 });
 
 const port = process.env.PORT || 8080;
