@@ -8,12 +8,14 @@ import Login from './Login';
 const App = () => {
     return (
         <BrowserRouter>
-            <Route exact path="/" component={Home} />
-            <Route path="/quiz" component={Quiz} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />   
+            <div>
+                <Route exact path="/" component={Home} />
+                <Route path="/quiz" component={Quiz} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/login" component={Login} />  
+            </div>     
         </BrowserRouter>
-    );
+    )
 }
 
 export default App;
