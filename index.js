@@ -4,7 +4,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
 const path = require('path');
-const Router = require('./src/routes');
+
+const Router = require('./src/routes')(express.Router());
 const userController = require('./src/controllers/userControllerP');
 const User = require('./src/models/usersP');
 
