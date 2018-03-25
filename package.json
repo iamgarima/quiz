@@ -1,36 +1,55 @@
 {
-  "name": "quiz",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "history": "^4.7.2",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "pg": "^7.4.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
-  },
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.11",
-    "style-loader": "^0.20.3",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
-  }
+    "name": "quiz",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "body-parser": "^1.18.2",
+        "express": "^4.16.3",
+        "express-session": "^1.15.6",
+        "history": "^4.7.2",
+        "passport": "^0.4.0",
+        "passport-local": "^1.0.0",
+        "pg": "^7.4.1",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-router": "^4.2.0",
+        "react-router-dom": "^4.2.2"
+    },
+    "devDependencies": {
+        "babel": "^6.23.0",
+        "babel-loader": "^7.1.4",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-react": "^6.24.1",
+        "css-loader": "^0.28.11",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-import": "^2.9.0",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-react": "^7.7.0",
+        "husky": "^0.15.0-rc.13",
+        "lint-staged": "^7.0.0",
+        "style-loader": "^0.20.3",
+        "webpack": "^4.1.1",
+        "webpack-cli": "^2.0.12"
+    },
+    "lint-staged": {
+        "*.{js}": [],
+        "**/*.{js,jsx}": ["prettier --write", "eslint --fix", "git add"],
+        "**/*.{json,css,md}": ["prettier --write", "git add"]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "pre-push": "eslint"
+        }
+    }
 }
