@@ -39,10 +39,9 @@
         "lint-staged": "^7.0.0",
         "style-loader": "^0.20.3",
         "webpack": "^4.1.1",
-        "webpack-cli": "^2.0.12"
+        "webpack-cli": "^2.0.13"
     },
     "lint-staged": {
-        "*.{js}": [],
         "**/*.{js,jsx}": ["prettier --write", "eslint --fix", "git add"],
         "**/*.{json,css,md}": ["prettier --write", "git add"]
     },
