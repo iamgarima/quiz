@@ -5,7 +5,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const Router = require("./src/routes")(express.Router());
+const Router = require("./src/routes");
 const userController = require("./src/controllers/userControllerP");
 const User = require("./src/models/usersP");
 
@@ -19,10 +19,10 @@ const strategy = new LocalStrategy((username, password, done) => {
         if (result.length === 0) {
             done("Please check if you are signed up!!!");
         } else if (password === result[0].password) {
-                done(null, result[0]);
-            } else {
-                done("Incorrect password");
-            }
+            done(null, result[0]);
+        } else {
+            done("Incorrect password");
+        }
     });
 });
 
@@ -56,6 +56,6 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
     res.send(true);
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

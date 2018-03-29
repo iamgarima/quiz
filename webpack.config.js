@@ -3,7 +3,7 @@ const path = require("path");
 
 const webpackConfig = {
     watch: true,
-    entry: "./public/index.js",
+    entry: "./publicR/index.js",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "./dist")
@@ -16,7 +16,8 @@ const webpackConfig = {
                 use: {
                     loader: "babel-loader",
                     options: {
-                        presets: ["babel-preset-env", "babel-preset-react"]
+                        presets: ["babel-preset-env", "babel-preset-react"],
+                        plugins: ["transform-object-rest-spread"]
                     }
                 }
             },
@@ -45,3 +46,5 @@ if (process.argv[2] === "-p") {
     );
     webpackConfig.optimization.minimize = true;
 }
+
+module.exports = webpackConfig;

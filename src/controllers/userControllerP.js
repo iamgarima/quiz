@@ -1,13 +1,13 @@
-const User = require('../models/usersP');
+const User = require("../models/usersP");
 
 const addUser = (req, res) => {
-    User.addUser(req.body.username, req.body.password)  // why passing email as username here
-        .then(result => res.send(result))
+    User.addUser(req.body.username, req.body.password) // why passing email as username here
+        .then(result => res.send(result[0]))
         .catch(err => {
-            console.log('Error in addUser controller');
+            console.log("Error in addUser controller");
             res.send(err);
-        });    // how error will happen here ?
-}
+        }); // how error will happen here ?
+};
 
 /* No need for this function */
 // export const getUser = (req, res) => {
@@ -29,7 +29,6 @@ const addUser = (req, res) => {
 //         });
 // }
 
-
 module.exports = {
     addUser
-}
+};
