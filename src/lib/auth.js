@@ -2,6 +2,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 const User = require("../models/users");
+const { hashPassword } = require("../helpers/hashPassword");
 
 const strategy = new LocalStrategy(
     {
@@ -12,7 +13,7 @@ const strategy = new LocalStrategy(
         User.getUserGivenEmail(username).then(result => {
             if (result.length === 0) {
                 done("Please check if you are signed up!!!");
-            } else if (password === result[0].password) {
+            } else if (hashPassword(password) === result[0].password) {
                 done(null, result[0]);
             } else {
                 done("Incorrect password");
