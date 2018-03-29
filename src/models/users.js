@@ -1,34 +1,54 @@
-const db = require('../db');
+const db = require("../db");
+const { validateEmail, validatePassword } = require("../helpers/validations");
+const { hashPassword } = require("../helpers/hashPassword");
 
-exports.addUser = (email, password, cb) => {
-    const text = 'INSERT INTO users(email, password) values($1, $2)';
-    db.query(text, [email, password], (err, result) => {
-        if(err) {
-            cb(err, null);
-        } else {
-            cb(null, result.rows);
+const addUser = (email, password) =>
+    new Promise((resolve, reject) => {
+        if (!validateEmail(email)) {
+            reject(new Error("Bad Email"));
+            return;
         }
-    })
-}
+        if (!validatePassword(password)) {
+            reject(new Error("Bad Password"));
+            return;
+        }
 
-exports.getUser = (email, cb) => {
-    const text = 'SELECT * from users where email=$1';
-    db.query(text, [email], (err, result) => {
-        if(err) {
-            cb(err, null);
-        } else {
-            cb(null, result.rows);
-        }
-    })
-}
+        db
+            .query(
+                "Insert into users(email, password) values($1, $2) returning(id, email)",
+                [email, hashPassword(password)]
+            )
+            .then(result => resolve(result.rows[0]))
+            .catch(err => {
+                console.log("Error from addUser model: ", err); // eslint-disable-line no-console
+                reject(err);
+            });
+    });
 
-exports.checkUser = (id, cb) => {
-    const text = 'SELECT * from users where id=$1';
-    db.query(text, [id], (err, result) => {
-        if(err) {
-            cb(err, null);
-        } else {
-            cb(null, result.rows);
-        }
-    })
-}
+const getUserGivenEmail = email =>
+    new Promise((resolve, reject) => {
+        db
+            .query("Select * from users where email=$1", [email])
+            .then(result => resolve(result.rows[0]))
+            .catch(err => {
+                console.log("Error from getUserGivenEmail model: ", err); // eslint-disable-line no-console
+                reject(err);
+            });
+    });
+
+const getUserGivenId = userId =>
+    new Promise((resolve, reject) => {
+        db
+            .query("Select * from users where id=$1", [userId])
+            .then(result => resolve(result.rows[0]))
+            .catch(err => {
+                console.log("Error from getUserGivenId model: ", err); // eslint-disable-line no-console
+                reject(err);
+            });
+    });
+
+module.exports = {
+    addUser,
+    getUserGivenEmail,
+    getUserGivenId
+};
