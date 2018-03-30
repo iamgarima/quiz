@@ -2,8 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 
 const webpackConfig = {
-    watch: true,
-    entry: "./publicR/index.js",
+    entry: "./public/index.js",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "./dist")

@@ -1,14 +1,18 @@
 {
     "name": "quiz",
     "version": "1.0.0",
-    "description": "",
+    "description": "A React Quiz App",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "webpack"
+        "prestart": "npm install && npm run prod",
+        "start": "node index.js",
+        "prod": "webpack -p",
+        "dev:node": "nodemon --inspect index.js",
+        "dev:webpack": "webpack --watch"
     },
-    "author": "",
-    "license": "ISC",
+    "author": "Garima Kamboj<garima.kamboj@icloud.com>",
+    "license": "MIT",
     "dependencies": {
         "axios": "^0.18.0",
         "body-parser": "^1.18.2",
@@ -43,6 +47,7 @@
         "eslint-plugin-react": "^7.7.0",
         "husky": "^0.15.0-rc.13",
         "lint-staged": "^7.0.0",
+        "nodemon": "^1.17.2",
         "style-loader": "^0.20.3",
         "webpack": "^4.1.1",
         "webpack-cli": "^2.0.13"
