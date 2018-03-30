@@ -60,7 +60,7 @@ const getQuestionsWithOptions = async qIdList => {
                 );
                 Promise.all(optionsTextListExec)
                     .then(optionsTextList => {
-                        ques.options = optionsTextList;
+                        ques.options = optionsTextList; // eslint-disable-line no-param-reassign
                         resolve(ques);
                     })
                     .catch(err => {
@@ -72,7 +72,8 @@ const getQuestionsWithOptions = async qIdList => {
         const updatedQuesList = await Promise.all(updatedQuesListExec);
         return updatedQuesList;
     } catch (err) {
-        console.log(                                                   // eslint-disable-line no-console
+        console.log(
+            // eslint-disable-line no-console
             "Error happened in getQuestionswithOptions model: ",
             err
         );
