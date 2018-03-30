@@ -1,17 +1,18 @@
 const User = require("../models/users");
 
-const addUser = (req, res) => {
+const addUser = async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
-        res.send(400);
+        res.sendStatus(400);
         return;
     }
 
-    User.addUser(username, password)
-        .then(result => res.send(result))
-        .catch(() => {
-            res.send(500);
-        });
+    try {
+        const result = await User.addUser(username, password);
+        res.send(result);
+    } catch (err) {
+        res.sendStatus(500);
+    }
 };
 
 module.exports = {
