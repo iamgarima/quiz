@@ -1,29 +1,34 @@
-const Ques = require('../models/questions');
+const Quiz = require("../models/questions");
 
-exports.getQuestions = (req, res) => {
-    if(req.user) {
-        Ques.getQuestions((err, result) => {
-            if(err) {
-                res.send('Error!!!', err);
+const generateRandomQidList = n =>
+    Quiz.getRowCount("questions")
+        .then(count => {
+            const randomList = [];
+            while (randomList.length !== n) {
+                const val = Math.ceil(Math.random() * count);
+                if (randomList.indexOf(val) === -1) {
+                    randomList.push(val);
+                }
             }
-            res.send(result);
-        });
-    } else {
-        res.send('Please login first');
-    }
-}
+            return randomList;
+        })
+        .catch(err => console.log("Error")); // eslint-disable-line no-console
 
-exports.getAnswers = (req, res) => {
-    //if(req.session.userId) {
-    if(req.user) {    
-        Ques.getAnswers((err, result) => {
-            if(err) {
-                res.send('Error!!!', err);
-            }
-            // console.log('I am the user\'s email id', req.user.email);
-            res.send(result);
-        });
-    } else {
-        res.send('Login first');
-    }
-}
+const getQuestions = (req, res) => {
+    generateRandomQidList(req.body.count).then(qIdList => {
+        Quiz.getQuestionsWithOptions(qIdList)
+            .then(result => res.send(result))
+            .catch(err => res.send(500));
+    });
+};
+
+const getAnswers = (req, res) => {
+    Quiz.getAnswersForQuestions(req.body.qIdList)
+        .then(result => res.send(result))
+        .catch(err => res.send(500));
+};
+
+module.exports = {
+    getQuestions,
+    getAnswers
+};
