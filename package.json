@@ -9,7 +9,7 @@
         "start": "node index.js",
         "prod": "webpack -p",
         "dev:node": "nodemon --inspect index.js",
-        "dev:webpack": "webpack --watch"
+        "dev:webpack": "webpack -d --watch"
     },
     "author": "Garima Kamboj<garima.kamboj@icloud.com>",
     "license": "MIT",
@@ -24,6 +24,7 @@
         "passport": "^0.4.0",
         "passport-local": "^1.0.0",
         "pg": "^7.4.1",
+        "prop-types": "^15.6.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-redux": "^5.0.7",
@@ -48,6 +49,7 @@
         "husky": "^0.15.0-rc.13",
         "lint-staged": "^7.0.0",
         "nodemon": "^1.17.2",
+        "sass-loader": "^6.0.7",
         "style-loader": "^0.20.3",
         "webpack": "^4.1.1",
         "webpack-cli": "^2.0.13"
