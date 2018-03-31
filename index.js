@@ -13,8 +13,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(bodyParser.json());
-app.use(passport.initialize());
-app.use(enrouten({ directory: path.join(__dirname, "src/routes") }));
+
 app.use(
     session({
         secret: "never guess",
@@ -22,7 +21,11 @@ app.use(
         saveUninitialized: true
     })
 );
+
+app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(enrouten({ directory: path.join(__dirname, "src/routes") }));
 
 const port = process.env.PORT || 3000;
 
