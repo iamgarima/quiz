@@ -12,11 +12,9 @@ const answerReducer = (state = [], action) => {
 };
 
 export const getAnswers = qIdList => dispatch => {
-    console.log("second", qIdList);
     axios
         .post("quiz/solutions", { qIdList })
         .then(res => {
-            console.log("m hu nas ka res", res.data);
             dispatch({
                 type: ADD_ANSWERS,
                 payload: {
@@ -25,7 +23,7 @@ export const getAnswers = qIdList => dispatch => {
             });
         })
         .catch(err => {
-            alert(err);
+            alert(err); // eslint-disable-line no-undef
         });
 };
 
