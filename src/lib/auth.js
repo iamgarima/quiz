@@ -39,4 +39,12 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-module.exports = { strategy };
+const ensureAuthenticated = (req, res, next) => {
+    if (req.user && req.user.email) {
+        next();
+    } else {
+        res.sendStatus(404);
+    }
+};
+
+module.exports = { strategy, ensureAuthenticated };
