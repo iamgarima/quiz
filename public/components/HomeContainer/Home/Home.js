@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Dialog from "material-ui/Dialog";
+import PropTypes from "prop-types";
 import FlatButton from "material-ui/FlatButton";
 import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
-import { addUser } from "../../modules/users";
-import { loginUser } from "../../modules/currentUserDetails";
+import CircularProgress from "material-ui/CircularProgress";
+import SignupModal from "./SignupModal/SignupModal";
+import LoginModal from "./LoginModal/LoginModal";
 
 class Home extends Component {
     constructor(props) {
@@ -23,6 +22,10 @@ class Home extends Component {
         this.handleSignupPassword = this.handleSignupPassword.bind(this);
         this.handleLoginEmail = this.handleLoginEmail.bind(this);
         this.handleLoginPassword = this.handleLoginPassword.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.isUserLoggedIn();
     }
 
     handleClose() {
@@ -76,77 +79,59 @@ class Home extends Component {
           />
         ];
 
+        if (this.props.user.isLoggedIn === false) {
+            return (
+              <div>
+                <h1>Quiz</h1>
+                <RaisedButton
+                  label="Signup"
+                  primary
+                  onClick={this.handleSignup}
+                />
+                <SignupModal
+                  actions={actions}
+                  open={this.state.openSignup}
+                  onChangeEmail={this.handleSignupEmail}
+                  onChangePassword={this.handleSignupPassword}
+                />
+                <p>or</p>
+                <RaisedButton
+                  label="Login"
+                  primary
+                  onClick={this.handleLogin}
+                />
+                <LoginModal
+                  actions={actions}
+                  open={this.state.openLogin}
+                  onChangeEmail={this.handleLoginEmail}
+                  onChangePassword={this.handleLoginPassword}
+                />
+              </div>
+            );
+        }
         return (
           <div>
-            <h1>Quiz</h1>
-            <RaisedButton
-              label="Signup"
-              primary
-              onClick={this.handleSignup}
-            />
-            <Dialog
-              title="Signup"
-              actions={actions}
-              modal
-              open={this.state.openSignup}
-            >
-              <TextField
-                hintText="Email"
-                floatingLabelText="Email"
-                type="email"
-                onChange={this.handleSignupEmail}
-                required
-              />
-              <br />
-              <TextField
-                hintText="Password"
-                floatingLabelText="Password"
-                type="password"
-                onChange={this.handleSignupPassword}
-                required
-              />
-            </Dialog>
-            <p>or</p>
-            <RaisedButton
-              label="Login"
-              primary
-              onClick={this.handleLogin}
-            />
-            <Dialog
-              title="Login"
-              actions={actions}
-              modal
-              open={this.state.openLogin}
-            >
-              <TextField
-                hintText="Email"
-                floatingLabelText="Email"
-                type="email"
-                onChange={this.handleLoginEmail}
-                required
-              />
-              <br />
-              <TextField
-                hintText="Password"
-                floatingLabelText="Password"
-                type="password"
-                onChange={this.handleLoginPassword}
-                required
-              />
-            </Dialog>
+            <CircularProgress />
           </div>
         );
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    addUser: (email, password) => {
-        dispatch(addUser(email, password));
-    },
-    loginUser: (email, password) => {
-        dispatch(loginUser(email, password));
-    }
-});
+Home.propTypes = {
+    isUserLoggedIn: PropTypes.func.isRequired,
+    addUser: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
+    user: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        email: PropTypes.string.isRequired,
+        isLoggedIn: PropTypes.oneOf([null, true, false]).isRequired,
+        markedAnswers: PropTypes.arrayOf(
+            PropTypes.shape({
+                qId: PropTypes.number.isRequired,
+                markedAns: PropTypes.number.isRequired
+            })
+        ).isRequired
+    }).isRequired
+};
 
-export default connect(null, mapDispatchToProps)(Home);
-// export default Home;
+export default Home;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 
 const RadioAnswer = props => (
@@ -10,5 +11,15 @@ const RadioAnswer = props => (
     </RadioButtonGroup>
   </div>
 );
+
+RadioAnswer.propTypes = {
+    handleRadio: PropTypes.func.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            text: PropTypes.string.isRequired
+        })
+    ).isRequired
+};
 
 export default RadioAnswer;

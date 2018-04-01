@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
-import { addMarkedAns } from "../../modules/currentUserDetails";
-import { getQuestions } from "../../modules/questions";
 import Question from "./Question/Question";
 import Answer from "./Answer/RadioAnswer/RadioAnswer";
 
@@ -23,25 +21,20 @@ class Quiz extends Component {
     }
 
     componentDidMount() {
-        this.props.addQuizType({
-            type: "ADD_QUIZ_TYPE",
-            payload: {
-                quiz: "General Knowlegde"
-            }
-        });
         this.props.getQuestions(4);
     }
 
     handleUpdates() {
         let count = 0;
         this.selected.qId = this.props.questions[this.state.count].id;
+        /* eslint-disable no-param-reassign */
         this.userResponses.forEach(userResponse => {
             if (userResponse.qId === this.selected.qId) {
                 userResponse.markedAns = this.selected.markedAns;
                 count += 1;
             }
         });
-        console.log("this.userResponses", this.userResponses, this.selected);
+        /* eslint-enable no-param-reassign */
         if (count === 0) {
             const obj = Object.assign({}, this.selected);
             this.userResponses.push(obj);
@@ -68,12 +61,7 @@ class Quiz extends Component {
 
     handleSubmit() {
         this.handleUpdates();
-        this.props.updateUserResponseStorage(() => ({
-            type: "ADD_MARKED_ANSWERS",
-            payload: {
-                currentMarkedAnswers: this.userResponses
-            }
-        }));
+        this.props.addMarkedAnswers(this.userResponses);
         this.props.history.push("/result");
     }
 
@@ -132,23 +120,24 @@ class Quiz extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    questions: state.questions
-});
+Quiz.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired,
+    questions: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            text: PropTypes.string.isRequired,
+            options: PropTypes.arrayOf(
+                PropTypes.shape({
+                    id: PropTypes.number.isRequired,
+                    text: PropTypes.string.isRequired
+                })
+            ).isRequired
+        })
+    ).isRequired,
+    getQuestions: PropTypes.func.isRequired,
+    addMarkedAnswers: PropTypes.func.isRequired
+};
 
-const mapDispatchToProps = dispatch => ({
-    getQuestions: n => {
-        dispatch(getQuestions(n));
-    },
-    addMarkedAns: (qId, markedAnsId) => {
-        dispatch(addMarkedAns(qId, markedAnsId));
-    },
-    updateUserResponseStorage: userResDispatch => {
-        dispatch(userResDispatch());
-    },
-    addQuizType: quizTypeObj => {
-        dispatch(quizTypeObj);
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
+export default Quiz;

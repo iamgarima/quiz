@@ -25,9 +25,10 @@ const addUser = async (email, password) => {
 
 const getUserGivenEmail = async email => {
     try {
-        const result = await db.query("Select * from users where email=$1", [
-            email
-        ]);
+        const result = await db.query(
+            "Select * from users where email=$1 returning(id, email)",
+            [email]
+        );
         return result.rows[0];
     } catch (err) {
         console.log("Error from getUserGivenEmail model: ", err); // eslint-disable-line no-console
@@ -37,9 +38,10 @@ const getUserGivenEmail = async email => {
 
 const getUserGivenId = async userId => {
     try {
-        const result = await db.query("Select * from users where id=$1", [
-            userId
-        ]);
+        const result = await db.query(
+            "Select * from users where id=$1 returning(id, email)",
+            [userId]
+        );
         return result.rows[0];
     } catch (err) {
         console.log("Error from getUserGivenId model: ", err); // eslint-disable-line no-console
