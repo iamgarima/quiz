@@ -4,7 +4,13 @@ import Dialog from "material-ui/Dialog";
 import TextField from "material-ui/TextField";
 
 const LoginModal = props => (
-  <Dialog title="Login" actions={props.actions} modal open={props.open} className="login-dialog">
+  <Dialog
+    title="Login"
+    actions={props.actions}
+    modal
+    open={props.open}
+    className="login-dialog"
+  >
     <TextField
       hintText="Email"
       floatingLabelText="Email*"

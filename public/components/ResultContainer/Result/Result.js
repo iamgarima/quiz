@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import CircularProgress from "material-ui/CircularProgress";
 import Header from "../../Header/Header";
-import './Result.scss';
+import "./Result.scss";
 
 class Result extends Component {
     constructor(props) {
@@ -30,7 +30,10 @@ class Result extends Component {
           <div className="result">
             {/* <h2> Hi {this.props.user.email},</h2> */}
             <h1>
-                    YOUR SCORE IS <span>{this.score}/{this.props.answers.length}</span>
+                    YOUR SCORE IS{" "}
+              <span>
+                {this.score}/{this.props.answers.length}
+              </span>
             </h1>
           </div>
         );
