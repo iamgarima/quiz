@@ -148,7 +148,8 @@ class Quiz extends Component {
             <Header text="YOU WILL DO IT" />
             <div className="quiz">
               <Question
-                text={this.props.questions[this.state.count].text}
+                text={this.props.questions[this.state.count].text} 
+                quesNumber={this.state.count + 1}
               />
               <Answer
                 handleRadio={this.handleRadio}
