@@ -8,7 +8,7 @@ const ADD_MARKED_ANSWERS = "ADD_MARKED_ANSWERS";
 const INITIAL_STATE = {
     id: 0,
     email: "",
-    isLoggenIn: null,
+    isLoggedIn: null,
     markedAnswers: []
 };
 
@@ -60,13 +60,8 @@ export const addUser = (username, password) => dispatch => {
             password
         })
         .then(res => {
-            dispatch({
-                type: ADD_USER,
-                payload: {
-                    user: res.data
-                }
-            });
-            history.push("/quiz");
+            console.log("Signup response", res.data);
+            loginUser(username, password)(dispatch);
         })
         .catch(err => {
             alert(err); // eslint-disable-line no-undef

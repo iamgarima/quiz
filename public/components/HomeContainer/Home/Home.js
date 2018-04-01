@@ -5,6 +5,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
 import SignupModal from "./SignupModal/SignupModal";
 import LoginModal from "./LoginModal/LoginModal";
+import Header from "../../Header/Header";
 
 class Home extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Home extends Component {
             openSignup: false,
             openLogin: false
         };
+        this.disableSubmit = false;
         this.handleClose = this.handleClose.bind(this);
         this.handleSignup = this.handleSignup.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
@@ -33,10 +35,12 @@ class Home extends Component {
     }
 
     handleSignupSubmit() {
+        this.disableSubmit = true;
         this.props.addUser(this.signupEmail, this.signupPassword);
     }
 
     handleLoginSubmit() {
+        this.disableSubmit = true;
         this.props.loginUser(this.loginEmail, this.loginPassword);
     }
 
@@ -70,7 +74,7 @@ class Home extends Component {
           <FlatButton
             label={this.state.openSignup ? "Signup" : "Login"}
             primary
-                // disabled={true}
+            disabled={this.disableSubmit}
             onClick={
                     this.state.openSignup
                         ? this.handleSignupSubmit
@@ -82,7 +86,7 @@ class Home extends Component {
         if (this.props.user.isLoggedIn === false) {
             return (
               <div>
-                <h1>Quiz</h1>
+                <Header text="QUIZ" />
                 <RaisedButton
                   label="Signup"
                   primary
@@ -122,15 +126,7 @@ Home.propTypes = {
     addUser: PropTypes.func.isRequired,
     loginUser: PropTypes.func.isRequired,
     user: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        email: PropTypes.string.isRequired,
-        isLoggedIn: PropTypes.oneOf([null, true, false]).isRequired,
-        markedAnswers: PropTypes.arrayOf(
-            PropTypes.shape({
-                qId: PropTypes.number.isRequired,
-                markedAns: PropTypes.number.isRequired
-            })
-        ).isRequired
+        isLoggedIn: PropTypes.oneOf([null, true, false])
     }).isRequired
 };
 

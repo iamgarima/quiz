@@ -4,6 +4,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
 import Question from "./Question/Question";
 import Answer from "./Answer/RadioAnswer/RadioAnswer";
+import Header from "../../Header/Header";
 
 class Quiz extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Quiz extends Component {
         this.state = {
             count: 0
         };
+        this.disableSubmit = false;
         this.userResponses = [];
         this.selected = {};
         this.handleRadio = this.handleRadio.bind(this);
@@ -60,8 +62,16 @@ class Quiz extends Component {
     }
 
     handleSubmit() {
+        this.disableSubmit = true;
         this.handleUpdates();
-        this.props.addMarkedAnswers(this.userResponses);
+        this.props.addMarkedAnswers({
+            type: "ADD_MARKED_ANSWERS",
+            payload: {
+                user: {
+                    markedAnswers: this.userResponses
+                }
+            }
+        });
         this.props.history.push("/result");
     }
 
@@ -76,6 +86,7 @@ class Quiz extends Component {
                 <RaisedButton
                   label="Submit"
                   primary
+                  disabled={this.disableSubmit}
                   onClick={this.handleSubmit}
                 />
                 <RaisedButton
@@ -109,6 +120,7 @@ class Quiz extends Component {
 
         return (
           <div>
+            <Header text="YOU WILL DO IT" />
             <Question text={this.props.questions[this.state.count].text} />
             <Answer
               handleRadio={this.handleRadio}
