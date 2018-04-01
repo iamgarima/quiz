@@ -41,6 +41,7 @@ class Quiz extends Component {
             const obj = Object.assign({}, this.selected);
             this.userResponses.push(obj);
         }
+        this.state.checked = false;
     }
 
     handleRadio(e, value) {
@@ -48,31 +49,43 @@ class Quiz extends Component {
     }
 
     handlePrevious() {
-        this.handleUpdates();
-        this.setState(prevState => ({
-            count: prevState.count - 1
-        }));
+        if (this.selected.markedAns) {
+            this.handleUpdates();
+            this.setState(prevState => ({
+                count: prevState.count - 1
+            }));
+        } else {
+            alert("Please select an option."); // eslint-disable-line no-undef
+        }
     }
 
     handleNext() {
-        this.handleUpdates();
-        this.setState(prevState => ({
-            count: prevState.count + 1
-        }));
+        if (this.selected.markedAns) {
+            this.handleUpdates();
+            this.setState(prevState => ({
+                count: prevState.count + 1
+            }));
+        } else {
+            alert("Please select an option."); // eslint-disable-line no-undef
+        }
     }
 
     handleSubmit() {
-        this.disableSubmit = true;
-        this.handleUpdates();
-        this.props.addMarkedAnswers({
-            type: "ADD_MARKED_ANSWERS",
-            payload: {
-                user: {
-                    markedAnswers: this.userResponses
+        if (this.selected.markedAns) {
+            this.disableSubmit = true;
+            this.handleUpdates();
+            this.props.addMarkedAnswers({
+                type: "ADD_MARKED_ANSWERS",
+                payload: {
+                    user: {
+                        markedAnswers: this.userResponses
+                    }
                 }
-            }
-        });
-        this.props.history.push("/result");
+            });
+            this.props.history.push("/result");
+        } else {
+            alert("Please select an option."); // eslint-disable-line no-undef
+        }
     }
 
     requiredButtons() {
