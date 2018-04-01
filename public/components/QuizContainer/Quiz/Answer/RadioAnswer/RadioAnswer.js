@@ -6,7 +6,7 @@ const RadioAnswer = props => (
   <div>
     <RadioButtonGroup name="options" onChange={props.handleRadio}>
       {props.options.map(option => (
-        <RadioButton value={option.id} label={option.text} />
+        <RadioButton value={option.id} label={option.text} style={{ marginTop: 5 }} />
             ))}
     </RadioButtonGroup>
   </div>

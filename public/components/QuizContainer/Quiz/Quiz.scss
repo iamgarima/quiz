@@ -1,0 +1,13 @@
+.quiz {
+    width: 900px;
+    margin: auto;
+    margin-left: 25%;
+    margin-top: 11%;
+    .quiz-btn {
+        margin-top: 50px;
+        .quiz-next-btn, .quiz-submit-btn {
+            margin-top: 10px;
+            float: right!important;
+        }
+    }
+}

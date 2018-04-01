@@ -7,25 +7,25 @@ const SignupModal = props => (
   <Dialog title="Signup" actions={props.actions} modal open={props.open}>
     <TextField
       hintText="Email"
-      floatingLabelText="Email"
+      floatingLabelText="Email*"
       type="email"
       onChange={props.onChangeEmail}
-      required
+      style={{ width: 700 }}
     />
     <br />
     <TextField
       hintText="Password"
-      floatingLabelText="Password"
+      floatingLabelText="Password*"
       type="password"
       onChange={props.onChangePassword}
-      required
+      style={{ width: 335 }}
     />
     <TextField
       hintText="Re-enter Password"
-      floatingLabelText="Re-enter Password"
+      floatingLabelText="Re-enter Password*"
       type="password"
       onChange={props.onChangeRePassword}
-      required
+      style={{ width: 335, marginLeft: 30 }}
     />
   </Dialog>
 );

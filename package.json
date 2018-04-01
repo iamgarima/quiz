@@ -48,6 +48,7 @@
         "eslint-plugin-react": "^7.7.0",
         "husky": "^0.15.0-rc.13",
         "lint-staged": "^7.0.0",
+        "node-sass": "^4.8.3",
         "nodemon": "^1.17.2",
         "sass-loader": "^6.0.7",
         "style-loader": "^0.20.3",

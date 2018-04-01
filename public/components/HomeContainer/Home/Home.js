@@ -10,6 +10,7 @@ import {
     validateEmail,
     validatePassword
 } from "../../../../src/helpers/validations";
+import './Home.scss';
 
 class Home extends Component {
     constructor(props) {
@@ -114,30 +115,35 @@ class Home extends Component {
             return (
               <div>
                 <Header text="QUIZ" />
-                <RaisedButton
-                  label="Signup"
-                  primary
-                  onClick={this.handleSignup}
-                />
-                <SignupModal
-                  actions={actions}
-                  open={this.state.openSignup}
-                  onChangeEmail={this.handleSignupEmail}
-                  onChangePassword={this.handleSignupPassword}
-                  onChangeRePassword={this.handleSignupRePassword}
-                />
-                <p>or</p>
-                <RaisedButton
-                  label="Login"
-                  primary
-                  onClick={this.handleLogin}
-                />
-                <LoginModal
-                  actions={actions}
-                  open={this.state.openLogin}
-                  onChangeEmail={this.handleLoginEmail}
-                  onChangePassword={this.handleLoginPassword}
-                />
+                <div className="home">
+                    <RaisedButton
+                    label="Signup"
+                    primary
+                    onClick={this.handleSignup}
+                    className="home-btn"
+                    />
+                    <SignupModal
+                    actions={actions}
+                    open={this.state.openSignup}
+                    onChangeEmail={this.handleSignupEmail}
+                    onChangePassword={this.handleSignupPassword}
+                    onChangeRePassword={this.handleSignupRePassword}
+                    />
+                    <br />
+                    <br />
+                    <RaisedButton
+                    label="Login"
+                    primary
+                    onClick={this.handleLogin}
+                    className="home-btn"
+                    />
+                    <LoginModal
+                    actions={actions}
+                    open={this.state.openLogin}
+                    onChangeEmail={this.handleLoginEmail}
+                    onChangePassword={this.handleLoginPassword}
+                    />
+                </div>
               </div>
             );
         }

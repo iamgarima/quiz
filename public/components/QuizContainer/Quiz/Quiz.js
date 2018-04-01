@@ -5,6 +5,7 @@ import CircularProgress from "material-ui/CircularProgress";
 import Question from "./Question/Question";
 import Answer from "./Answer/RadioAnswer/RadioAnswer";
 import Header from "../../Header/Header";
+import './Quiz.scss';
 
 class Quiz extends Component {
     constructor(props) {
@@ -91,7 +92,7 @@ class Quiz extends Component {
     requiredButtons() {
         if (this.state.count === 0) {
             return (
-              <RaisedButton label="Next" primary onClick={this.handleNext} />
+              <RaisedButton label="Next" primary onClick={this.handleNext} className="quiz-next-btn"/>
             );
         } else if (this.state.count === this.props.questions.length - 1) {
             return (
@@ -101,6 +102,7 @@ class Quiz extends Component {
                   primary
                   disabled={this.disableSubmit}
                   onClick={this.handleSubmit}
+                  className="quiz-submit-btn"
                 />
                 <RaisedButton
                   label="Previous"
@@ -117,7 +119,12 @@ class Quiz extends Component {
               primary
               onClick={this.handlePrevious}
             />
-            <RaisedButton label="Next" primary onClick={this.handleNext} />
+            <RaisedButton 
+                label="Next" 
+                primary 
+                onClick={this.handleNext}
+                className="quiz-next-btn" 
+            />
           </div>
         );
     }
@@ -134,12 +141,16 @@ class Quiz extends Component {
         return (
           <div>
             <Header text="YOU WILL DO IT" />
-            <Question text={this.props.questions[this.state.count].text} />
-            <Answer
-              handleRadio={this.handleRadio}
-              options={this.props.questions[this.state.count].options}
-            />
-            {this.requiredButtons()}
+            <div className="quiz">
+                <Question text={this.props.questions[this.state.count].text} />
+                <Answer
+                handleRadio={this.handleRadio}
+                options={this.props.questions[this.state.count].options}
+                />
+                <div className="quiz-btn">
+                    {this.requiredButtons()}
+                </div>
+            </div>    
           </div>
         );
     }
