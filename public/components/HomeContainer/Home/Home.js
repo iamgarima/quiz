@@ -26,6 +26,7 @@ class Home extends Component {
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleSignupEmail = this.handleSignupEmail.bind(this);
         this.handleSignupPassword = this.handleSignupPassword.bind(this);
+        this.handleSignupRePassword = this.handleSignupRePassword.bind(this);
         this.handleLoginEmail = this.handleLoginEmail.bind(this);
         this.handleLoginPassword = this.handleLoginPassword.bind(this);
     }
@@ -40,11 +41,13 @@ class Home extends Component {
 
     handleSignupSubmit() {
         if (!validateEmail(this.signupEmail)) {
-            alert("Please enter valid email."); // eslint-disable-line no-undef
+            alert("Please enter valid email."); // eslint-disable-line
         } else if (!validatePassword(this.signupPassword)) {
-            alert(                                                      // eslint-disable-line no-undef
+            alert(                                                      // eslint-disable-line
                 "Password should be minimum 6 digits long and should not include spaces."
             );
+        } else if(this.signupPassword !== this.signupRePassword) {
+            alert("Passwords did not match.");      // eslint-disable-line
         } else {
             this.disableSubmit = true;
             this.props.addUser(this.signupEmail, this.signupPassword);
@@ -53,9 +56,9 @@ class Home extends Component {
 
     handleLoginSubmit() {
         if (!validateEmail(this.loginEmail)) {
-            alert("Please enter valid email."); // eslint-disable-line no-undef
+            alert("Please enter valid email."); // eslint-disable-line
         } else if (!validatePassword(this.loginPassword)) {
-            alert(                                              // eslint-disable-line no-undef                      
+            alert(                                              // eslint-disable-line                      
                 "Password should be minimum 6 digits long and should not include spaces."
             );
         } else {
@@ -78,6 +81,10 @@ class Home extends Component {
 
     handleSignupPassword(e, value) {
         this.signupPassword = value.trim();
+    }
+
+    handleSignupRePassword(e, value) {
+        this.signupRePassword = value.trim();
     }
 
     handleLoginEmail(e, value) {
@@ -117,6 +124,7 @@ class Home extends Component {
                   open={this.state.openSignup}
                   onChangeEmail={this.handleSignupEmail}
                   onChangePassword={this.handleSignupPassword}
+                  onChangeRePassword={this.handleSignupRePassword}
                 />
                 <p>or</p>
                 <RaisedButton
