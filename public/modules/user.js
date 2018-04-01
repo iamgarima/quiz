@@ -49,7 +49,8 @@ export const loginUser = (username, password) => dispatch => {
             history.push("/quiz");
         })
         .catch(err => {
-            alert(err); // eslint-disable-line no-undef
+            console.log(err);
+            alert("Incorrect email or password."); // eslint-disable-line no-undef
         });
 };
 

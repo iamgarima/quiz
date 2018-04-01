@@ -3,7 +3,8 @@ const validateEmail = email => {
     return re.test(String(email).toLowerCase());
 };
 
-const validatePassword = password => password.length >= 6;
+const validatePassword = password =>
+    password !== undefined && password.length >= 6;
 
 module.exports = {
     validateEmail,

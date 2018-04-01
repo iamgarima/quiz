@@ -6,6 +6,10 @@ import CircularProgress from "material-ui/CircularProgress";
 import SignupModal from "./SignupModal/SignupModal";
 import LoginModal from "./LoginModal/LoginModal";
 import Header from "../../Header/Header";
+import {
+    validateEmail,
+    validatePassword
+} from "../../../../src/helpers/validations";
 
 class Home extends Component {
     constructor(props) {
@@ -35,13 +39,29 @@ class Home extends Component {
     }
 
     handleSignupSubmit() {
-        this.disableSubmit = true;
-        this.props.addUser(this.signupEmail, this.signupPassword);
+        if (!validateEmail(this.signupEmail)) {
+            alert("Please enter valid email."); // eslint-disable-line no-undef
+        } else if (!validatePassword(this.signupPassword)) {
+            alert(                                                      // eslint-disable-line no-undef
+                "Password should be minimum 6 digits long and should not include spaces."
+            );
+        } else {
+            this.disableSubmit = true;
+            this.props.addUser(this.signupEmail, this.signupPassword);
+        }
     }
 
     handleLoginSubmit() {
-        this.disableSubmit = true;
-        this.props.loginUser(this.loginEmail, this.loginPassword);
+        if (!validateEmail(this.loginEmail)) {
+            alert("Please enter valid email."); // eslint-disable-line no-undef
+        } else if (!validatePassword(this.loginPassword)) {
+            alert(                                              // eslint-disable-line no-undef                      
+                "Password should be minimum 6 digits long and should not include spaces."
+            );
+        } else {
+            this.disableSubmit = true;
+            this.props.loginUser(this.loginEmail, this.loginPassword);
+        }
     }
 
     handleSignup() {
@@ -53,19 +73,19 @@ class Home extends Component {
     }
 
     handleSignupEmail(e, value) {
-        this.signupEmail = value;
+        this.signupEmail = value.trim();
     }
 
     handleSignupPassword(e, value) {
-        this.signupPassword = value;
+        this.signupPassword = value.trim();
     }
 
     handleLoginEmail(e, value) {
-        this.loginEmail = value;
+        this.loginEmail = value.trim();
     }
 
     handleLoginPassword(e, value) {
-        this.loginPassword = value;
+        this.loginPassword = value.trim();
     }
 
     render() {
