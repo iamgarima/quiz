@@ -36,12 +36,12 @@ class Result extends Component {
               </span>
             </h1>
             <p>
-                    Want to take the quiz again?{" "}
-              <span>
-                <i>
-                  <a href="/">Click here</a>
-                </i>
-              </span>
+                Want to take the quiz again?{" "}
+                <span>
+                    <i>
+                        <a href="/">Click here</a>
+                    </i>
+                </span>
             </p>
           </div>
         );
