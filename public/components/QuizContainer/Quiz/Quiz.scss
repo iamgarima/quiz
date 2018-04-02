@@ -1,8 +1,8 @@
 .quiz {
-    width: 900px;
+    width: 50%;
     margin: auto;
     margin-left: 25%;
-    margin-top: 11%;
+    margin-top: 23vh;
     .quiz-btn {
         margin-top: 50px;
         .quiz-next-btn, .quiz-submit-btn {
@@ -14,5 +14,22 @@
         font-size: 24px;
         font-weight: bold;
         display: inline-block;
+    }
+}
+
+@media(max-width: 768px) {
+    .quiz {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 17vh;
+        .quiz-btn {
+            .quiz-next-btn {
+                margin-top: 2px;
+            }
+            .quiz-submit-btn {
+                margin-top: 3px;
+            }
+        }
+        
     }
 }

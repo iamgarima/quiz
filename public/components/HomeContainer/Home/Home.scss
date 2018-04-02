@@ -1,8 +1,14 @@
 .home {
     margin: auto;
     text-align: center;
-    margin-top: 18%;
+    margin-top: 32vh;
     .home-btn {
         width: 200px!important;
+    }
+}
+
+@media(max-width: 768px) {
+    .home {
+        margin-top: 30vh;
     }
 }

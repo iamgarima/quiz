@@ -1,0 +1,23 @@
+.signup-email {
+    width: 100%!important;
+}
+
+.signup-password {
+    width: 46%!important;
+    margin-right: 7%!important;
+}
+
+.signup-re-password {
+    width: 46%!important;
+}
+
+@media(max-width: 676px) {
+    .signup-password {
+        width: 100%!important;
+        margin-right: 0!important;
+    }
+    
+    .signup-re-password {
+        width: 100%!important;
+    } 
+}

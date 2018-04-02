@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Dialog from "material-ui/Dialog";
 import TextField from "material-ui/TextField";
+import './LoginModal.scss';
 
 const LoginModal = props => (
   <Dialog
@@ -16,7 +17,8 @@ const LoginModal = props => (
       floatingLabelText="Email*"
       type="email"
       onChange={props.onChangeEmail}
-      style={{ width: 700 }}
+      className="login-email"
+    //   style={{ width: 700 }}
     />
     <br />
     <TextField
@@ -24,7 +26,8 @@ const LoginModal = props => (
       floatingLabelText="Password*"
       type="password"
       onChange={props.onChangePassword}
-      style={{ width: 700 }}
+    //   style={{ width: 700 }}
+      className="login-password"
     />
   </Dialog>
 );

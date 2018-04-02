@@ -17,7 +17,6 @@ class Result extends Component {
 
     showResult() {
         this.props.user.markedAnswers.forEach(marked => {
-            // eslint-disable-line
             this.props.answers.forEach(ans => {
                 if (ans.qid === marked.qId) {
                     if (ans.ansid === marked.markedAns) {

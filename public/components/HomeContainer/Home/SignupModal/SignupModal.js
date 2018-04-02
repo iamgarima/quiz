@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Dialog from "material-ui/Dialog";
 import TextField from "material-ui/TextField";
+import './SignupModal.scss';
 
 const SignupModal = props => (
   <Dialog title="Signup" actions={props.actions} modal open={props.open}>
@@ -10,7 +11,7 @@ const SignupModal = props => (
       floatingLabelText="Email*"
       type="email"
       onChange={props.onChangeEmail}
-      style={{ width: 700 }}
+      className="signup-email"
     />
     <br />
     <TextField
@@ -18,14 +19,14 @@ const SignupModal = props => (
       floatingLabelText="Password*"
       type="password"
       onChange={props.onChangePassword}
-      style={{ width: 335 }}
+      className="signup-password"
     />
     <TextField
       hintText="Re-enter Password"
       floatingLabelText="Re-enter Password*"
       type="password"
       onChange={props.onChangeRePassword}
-      style={{ width: 335, marginLeft: 30 }}
+      className="signup-re-password"
     />
   </Dialog>
 );
