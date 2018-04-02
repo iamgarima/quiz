@@ -5,9 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "prestart": "npm install && npm run prod",
         "start": "node index.js",
-        "prod": "webpack -p",
+        "build": "webpack -p",
         "dev:node": "nodemon --inspect index.js",
         "dev:webpack": "webpack -d --watch"
     },
