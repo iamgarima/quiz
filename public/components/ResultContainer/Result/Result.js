@@ -52,7 +52,7 @@ class Result extends Component {
             <Header text="RESULT" />
             {this.props.answers.length === 0 ||
                 this.props.user.markedAnswers.length === 0 ? (
-                  <CircularProgress />
+                  <CircularProgress className="loading" />
                 ) : (
                     this.showResult()
                 )}
