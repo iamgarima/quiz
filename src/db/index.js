@@ -1,5 +1,4 @@
 const { Pool } = require("pg");
-const { createTables } = require("./create");
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -8,7 +7,16 @@ const pool = new Pool({
 
 const query = (text, params) => pool.query(text, params);
 
-createTables();
+(async () => {
+    const text =
+        "CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, email TEXT, password TEXT); CREATE TABLE IF NOT EXISTS options (id SERIAL PRIMARY KEY, text TEXT); CREATE TABLE IF NOT EXISTS questions (id SERIAL PRIMARY KEY, text TEXT, options INTEGER[]); CREATE TABLE IF NOT EXISTS solutions (qId INTEGER, ansId INTEGER);";
+    try {
+        const result = await query(text, []);
+        console.log("Tables creation successfull", result);
+    } catch (err) {
+        console.log("Error while creating tables", err);
+    }
+})();
 
 module.exports = {
     query
