@@ -35,6 +35,14 @@ class Result extends Component {
                 {this.score}/{this.props.answers.length}
               </span>
             </h1>
+            <p>
+                    Want to take the quiz again?{" "}
+              <span>
+                <i>
+                  <a href="/">Click here</a>
+                </i>
+              </span>
+            </p>
           </div>
         );
     }
