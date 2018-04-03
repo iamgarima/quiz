@@ -148,8 +148,8 @@ class Home extends Component {
             );
         }
         return (
-          <div className="loading">
-            <CircularProgress />
+          <div>
+            <CircularProgress className="loading" />
           </div>
         );
     }

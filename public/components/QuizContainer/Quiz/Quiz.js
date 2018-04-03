@@ -137,8 +137,8 @@ class Quiz extends Component {
     render() {
         if (this.props.questions.length === 0) {
             return (
-              <div className="loading">
-                <CircularProgress />
+              <div>
+                <CircularProgress className="loading" />
               </div>
             );
         }
