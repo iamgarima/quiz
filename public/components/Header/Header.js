@@ -5,7 +5,7 @@ import "./Header.scss";
 
 const Header = props => (
   <div className="header">
-    <h1>{props.text}</h1>
+    <h1 className={props.logout ? null : "head"}>{props.text}</h1>
     {props.logout ? (
       <FlatButton href="/logout" label="Logout" className="logout" />
         ) : (
