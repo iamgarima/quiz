@@ -145,10 +145,10 @@ class Quiz extends Component {
 
         return (
           <div>
-            <Header text="YOU WILL DO IT" />
+            <Header text="YOU WILL DO IT" logout />
             <div className="quiz">
               <Question
-                text={this.props.questions[this.state.count].text} 
+                text={this.props.questions[this.state.count].text}
                 quesNumber={this.state.count + 1}
               />
               <Answer

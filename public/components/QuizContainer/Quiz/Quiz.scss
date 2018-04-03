@@ -6,7 +6,6 @@
     .quiz-btn {
         margin-top: 50px;
         .quiz-next-btn, .quiz-submit-btn {
-            margin-top: 10px;
             float: right!important;
         }
     }
@@ -28,14 +27,5 @@
         width: 80%;
         margin-left: 10%;
         margin-top: 17vh;
-        .quiz-btn {
-            .quiz-next-btn {
-                margin-top: 2px;
-            }
-            .quiz-submit-btn {
-                margin-top: 3px;
-            }
-        }
-        
     }
 }

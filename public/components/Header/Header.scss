@@ -12,4 +12,13 @@ body{
         padding-top: 30px;
         margin: 0;
     }
+    .logout {
+        float: right;
+        color: white!important;
+        margin-top: -35px !important;
+        margin-right: 20px !important;
+        span {
+            font-size: 18px !important;
+        }
+    }
 }

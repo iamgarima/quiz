@@ -44,7 +44,7 @@ class Home extends Component {
         if (!validateEmail(this.signupEmail)) {
             alert("Please enter valid email."); // eslint-disable-line
         } else if (!validatePassword(this.signupPassword)) {
-            alert(                                              // eslint-disable-line
+            alert(
                 "Password should be minimum 6 digits long and should not include spaces."
             );
         } else if (this.signupPassword !== this.signupRePassword) {
@@ -59,7 +59,7 @@ class Home extends Component {
         if (!validateEmail(this.loginEmail)) {
             alert("Please enter valid email."); // eslint-disable-line
         } else if (!validatePassword(this.loginPassword)) {
-            alert(                                              // eslint-disable-line
+            alert(
                 "Password should be minimum 6 digits long and should not include spaces."
             );
         } else {
@@ -114,7 +114,7 @@ class Home extends Component {
         if (this.props.user.isLoggedIn === false) {
             return (
               <div>
-                <Header text="QUIZ" />
+                <Header text="QUIZ" logout={false} />
                 <div className="home">
                   <RaisedButton
                     label="Signup"

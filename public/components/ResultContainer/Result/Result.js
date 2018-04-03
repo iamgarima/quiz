@@ -35,12 +35,12 @@ class Result extends Component {
               </span>
             </h1>
             <p>
-                Want to take the quiz again?{" "}
-                <span>
-                    <i>
-                        <a href="/">Click here</a>
-                    </i>
-                </span>
+                    Want to take the quiz again?{" "}
+              <span>
+                <i>
+                  <a href="/">Click here</a>
+                </i>
+              </span>
             </p>
           </div>
         );
@@ -49,7 +49,7 @@ class Result extends Component {
     render() {
         return (
           <div>
-            <Header text="RESULT" />
+            <Header text="RESULT" logout />
             {this.props.answers.length === 0 ||
                 this.props.user.markedAnswers.length === 0 ? (
                   <CircularProgress className="loading" />
